@@ -80,22 +80,34 @@ jQuery.ajax = function( settings ) {
 };
 
 jQuery.get = function(settings) {
-
+  settings.method = "GET";
+  return jQuery.ajax(settings);
 };
 
 jQuery.post = function(settings) {
-
+  settings.method = "POST";
+  settings.header = { "Content-Type": 'application/x-www-form-urlencoded' };
+  return jQuery.ajax(settings);
 };
 
 
 var $ = jQuery;
 
-var request1;
+var request1, request2, request3;
 window.onload = function() {
   request1 = $.ajax( {
     url: 'http://jsonplaceholder.typicode.com/posts/1',
     method: "GET"
   });
 
+  request2 = $.get( {url: 'http://jsonplaceholder.typicode.com/posts/1'});
 
+  request3 = $.post( {
+    url: 'http://jsonplaceholder.typicode.com/posts',
+    data: {
+      title: "Foo",
+      body: "this is my post",
+      userId: "1"
+    }
+  });
 };
